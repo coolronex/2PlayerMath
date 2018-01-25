@@ -14,10 +14,11 @@
 
 @property (nonatomic, strong) NSString *question;
 @property (nonatomic, assign) NSInteger answer;
-@property (nonatomic, assign) NSInteger randomNumber;
+@property (nonatomic, assign) NSInteger randomNumber1;
+@property (nonatomic, assign) NSInteger randomNumber2;
 @property (nonatomic, strong) Player *player;
 
-- (void) generateQuestion;
-- (void) checkAnswers;
+- (NSString *) generateQuestion;
+
 
 @end

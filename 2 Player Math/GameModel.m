@@ -15,30 +15,24 @@
     self = [super init];
     if (self) {
         
-        _randomNumber = arc4random_uniform(20);
+        int min = 1;
+        int max = 20;
         
+        _randomNumber1 = arc4random_uniform(max + min + 1) + min;
+        _randomNumber2 = arc4random_uniform(min + max + 1) + min;
     }
     return self;
 }
 
-- (void) generateQuestion {
+- (NSString *) generateQuestion {
     
-    self.question = [NSString stringWithFormat:@"%ld + %ld ?", self.randomNumber, self.randomNumber];
+    self.question = [NSString stringWithFormat:@"%ld + %ld = ?", self.randomNumber1, self.randomNumber2];
+    self.answer = self.randomNumber1 + self.randomNumber2;
     
+    return self.question;
 }
 
-- (void)checkAnswers {
-    
-    NSInteger question = [self.question intValue];
-    self.answer = self.randomNumber + self.randomNumber;
-    if (self.answer == question) {
-        
-        [self.player increaseScore];
-        
-    } else {
-        
-        [self.player reduceLife];
-    }
-}
+
+
 
 @end

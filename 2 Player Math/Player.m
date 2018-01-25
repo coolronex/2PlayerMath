@@ -21,14 +21,6 @@
     return self;
 }
 
-- (void)reduceLife {
-    
-    self.life--;
-}
 
-- (void)increaseScore {
-    
-    self.score++;
-}
 
 @end

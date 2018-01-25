@@ -13,7 +13,5 @@
 @property (nonatomic, assign) NSInteger life;
 @property (nonatomic, assign) NSInteger score;
 
-- (void) reduceLife;
-- (void) increaseScore;
 
 @end
