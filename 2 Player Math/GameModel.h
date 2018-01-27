@@ -12,13 +12,13 @@
 
 @interface GameModel : NSObject
 
-@property (nonatomic, strong) NSString *question;
+@property (nonatomic, strong) NSMutableString *question;
 @property (nonatomic, assign) NSInteger answer;
 @property (nonatomic, assign) NSInteger randomNumber1;
 @property (nonatomic, assign) NSInteger randomNumber2;
 @property (nonatomic, strong) Player *player;
 
-- (NSString *) generateQuestion;
+- (NSMutableString *) generateQuestion;
 
 
 @end

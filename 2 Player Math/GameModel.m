@@ -24,9 +24,9 @@
     return self;
 }
 
-- (NSString *) generateQuestion {
+- (NSMutableString *) generateQuestion {
     
-    self.question = [NSString stringWithFormat:@"%ld + %ld = ?", self.randomNumber1, self.randomNumber2];
+    self.question = [NSMutableString stringWithFormat:@"%ld + %ld = ?", self.randomNumber1, self.randomNumber2];
     self.answer = self.randomNumber1 + self.randomNumber2;
     
     return self.question;

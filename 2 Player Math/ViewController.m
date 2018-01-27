@@ -19,7 +19,7 @@
 @property (nonatomic, strong) Player *playerOne;
 @property (nonatomic, strong) Player *playerTwo;
 @property (nonatomic, strong) NSMutableString *userInputMutableString;
-@property (assign) BOOL playerSwitch;
+@property (assign) BOOL playerOneTurn; //set to yes at viewdidload...it's player two's turn when it's set to NO
 
 - (IBAction)zeroButton;
 - (IBAction)oneButton;
@@ -53,14 +53,13 @@
     self.playerTwo = [[Player alloc] init];
     NSMutableString *userInputMutableString = [[NSMutableString alloc] init];
     self.userInputMutableString = userInputMutableString;
+   
     
     self.p1LifeTextLabel.text = [NSString stringWithFormat:@"P1  -  Life: %ld | Score: %ld", self.playerOne.life, self.playerOne.score];
     self.p2LifeTextLabel.text = [NSString stringWithFormat:@"P2  -  Life: %ld | Score: %ld", self.playerTwo.life, self.playerTwo.score];
     
-    self.questionLabel.text = [self.gameModel generateQuestion];
     self.userInputLabel.text = userInputMutableString;
-    
-    self.playerSwitch = YES;
+    self.playerOneTurn = YES;
     
     
 
@@ -130,14 +129,18 @@
 
 - (IBAction)deleteButton {
     
-    //in progress
+    if ([self.userInputMutableString length] >= 1) {
+        
+        [self.userInputMutableString deleteCharactersInRange:NSMakeRange([self.userInputMutableString length] - 1, 1)];
+        [self updateView];
+    }
 }
 
 
 - (IBAction)enterButton {
     
     NSInteger answer = [self.userInputMutableString intValue];
-    if (self.playerSwitch == YES) {
+    if (self.playerOneTurn == YES) {
         
         if (answer == self.gameModel.answer) {
             self.playerOne.score += 1;
@@ -147,7 +150,7 @@
             self.playerOne.life-=1;
             
         }
-        self.playerSwitch = NO;
+        self.playerOneTurn = NO;
         
     } else {
         
@@ -158,13 +161,17 @@
             self.playerTwo.life-=1;
             
         }
-        self.playerSwitch = YES;
+        self.playerOneTurn = YES;
     }
     
     self.userInputMutableString = [[NSMutableString alloc] init];
-    [self updateView];
+    self.gameModel = [[GameModel alloc] init];
     self.questionLabel.text = [self.gameModel generateQuestion];
+    [self updateView];
+    
 }
+
+
 
 
 @end
